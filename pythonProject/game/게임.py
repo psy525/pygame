@@ -9,8 +9,8 @@ print(위치설정.a)
 pygame.init()
 
 #화면크기
-window_width=1820
-window_height=1050
+window_width=1920
+window_height=1080
 window=pygame.display.set_mode((window_width,window_height))
 pygame.display.set_caption("피하기") # 제목
 
