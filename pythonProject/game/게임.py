@@ -104,7 +104,7 @@ while running:
         character_y_pos=character_y_pos+jump
 
     #칼 위치
-
+ ########### 테그스트ㅡ트
     #구슬위치
 
     #벽 위치
