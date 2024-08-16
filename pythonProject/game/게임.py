@@ -30,7 +30,7 @@ background_width=window.get_rect().size[0]
 background_height=window.get_rect().size[1]
 background_x_pos=0
 background_y_pos=0
-map_speed=5 #맵이 왼쪽으로 움직이는 속도
+map_speed=0.5 #맵이 왼쪽으로 움직이는 속도
 
 # 캐릭터 위치
 character_sizes=[character.get_rect().size for character in characters]
@@ -45,8 +45,8 @@ attack_size=attack.get_rect().size
 attack_width=attack_size[0]
 attack_height=attack_size[1]
 attack_x_pos= window_width-attack_width
-attack_y_pos= character_y_pos
-attack_speed=5 # 칼 속도
+attack_y_pos= character_y_pos+45
+attack_speed=1 # 칼 속도
 
 
 # 구슬위치
@@ -54,8 +54,8 @@ item_size=item.get_rect().size
 item_width=item_size[0]
 item_height=item_size[1]
 item_x_pos= window_width-item_width
-item_y_pos= character_y_pos
-item_speed=5 # 칼 속도
+item_y_pos= character_y_pos -200
+item_speed=1 # 칼 속도
 
 # 장애물 위치
 wall_size=wall.get_rect().size
@@ -63,12 +63,13 @@ wall_width=wall_size[0]
 wall_height=wall_size[1]
 wall_x_pos=window_width-wall_width
 wall_y_pos=window_height-wall_height
+wall_speed=1
 
 # 하트 위치
 life_size=life.get_rect().size
 life_width=life_size[0]
 life_height=life_size[1]
-life_x_pos=10
+life_x_pos=40
 life_y_pos=60
 life_speed=5
 
@@ -105,13 +106,21 @@ while running:
 
 #각종 캐릭터, 이벤트들 위치 계산
     #캐릭터 위치
-        character_y_pos=character_y_pos+jump
+    character_y_pos=character_y_pos+jump
+
+    #배경위치
+    background_x_pos=background_x_pos-map_speed
+
 
     #칼 위치
- ########### 테그스트ㅡ트
+    attack_x_pos=attack_x_pos-attack_speed
+
+
     #구슬위치
+    item_x_pos=item_x_pos-item_speed
 
     #벽 위치
+    wall_x_pos=wall_x_pos-wall_speed
 
     #하트위치
 
@@ -127,13 +136,13 @@ while running:
 # 렌더링
     window.blit(background,(background_x_pos,background_y_pos))
     # 충돌시 일치하는 이미지 들어가게 설정
-    #  window.blit(characters, (character_x_pos,character_y_pos))
+    # window.blit(characters, (character_x_pos,character_y_pos))
     window.blit(attack, (attack_x_pos, attack_y_pos))
     window.blit(item, (item_x_pos,item_y_pos))
     window.blit(wall, (wall_x_pos,wall_y_pos))
 
     for i in range(max_life-hit_count):
-        window.blit(lifes[i], (life_x_pos,50+ i*(life_y_pos+10)))
+        window.blit(lifes[i], (life_x_pos,100+ i*(life_y_pos+30)))
 
     pygame.display.update()
 
