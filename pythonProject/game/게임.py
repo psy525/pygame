@@ -16,7 +16,7 @@ pygame.display.set_caption("피하기") # 제목
 
 #맵, 캐릭터, 날라오는거, 장애물
 background = pygame.image.load('../image/배경.png').convert_alpha()
-character_files = ['../image/J.png', '../image/R.png', '../image/L.png', '../image/S.png', '../image/sky.png', '../image/O.png','../image/P.png']
+character_files = ['../image/J.png', '../image/J.png', '../image/R.png', '../image/L.png', '../image/S.png', '../image/sky.png', '../image/O.png','../image/P.png']
 characters=[pygame.image.load(file).convert_alpha() for file in character_files]
 item= pygame.image.load("../image/구슬.png").convert_alpha()
 wall=pygame.image.load("../image/벽.png").convert_alpha()
@@ -40,6 +40,19 @@ character_x_pos=60
 character_y_pos= (window_height-character_height) + 10
 jump=0
 
+# 캐릭터별 색깔
+character_color={
+    (102, 153, 204): characters[1], # 제트
+    (196,53,210): characters[2], # #레이나
+    (255,100,68): characters[2], # #레이즈
+    (199,244,194): characters[2], # #세이지
+    (250,224,153): characters[2], # 스카이
+    (60,74,201): characters[2], # #오멘
+    (218,58,9): characters[2], # #피닉스
+    (0, 0, 0): characters[0]
+}
+
+
 # 공격위치
 attack_size=attack.get_rect().size
 attack_width=attack_size[0]
@@ -56,6 +69,26 @@ item_height=item_size[1]
 item_x_pos= window_width-item_width
 item_y_pos= character_y_pos -200
 item_speed=1 # 칼 속도
+
+#구슬 색깔
+item_colors={
+    (102, 153, 204), # 제트
+    (196,53,210), # 레이나
+    (255,100,68), # 레이즈
+    (199,244,194), #세이지
+    (250,224,153), # 스카이
+    (60,74,201), # 오멘
+    (218,58,9), # 피닉스
+}
+
+#구슬 색상 변경
+def colorized_image(image, color):
+    colored_image=pygame.Surface((item_width, item_height), pygame.SRCALPHA)
+    colored_image.blit(image, (0,0))
+
+    overlay = pygame.
+
+
 
 # 장애물 위치
 wall_size=wall.get_rect().size
@@ -80,6 +113,7 @@ lifes=[life]*max_life
 #총플레이
 score=0
 hit_count=0
+
 ###########
 #메인루프
 running = True
@@ -111,10 +145,8 @@ while running:
     #배경위치
     background_x_pos=background_x_pos-map_speed
 
-
     #칼 위치
     attack_x_pos=attack_x_pos-attack_speed
-
 
     #구슬위치
     item_x_pos=item_x_pos-item_speed
@@ -125,12 +157,19 @@ while running:
     #하트위치
 
 
-#충돌판정
 
+#충돌판정
+    # character_rect=characters.rect().size
 
 
 # 게임 룰
+    # 구슬 색상 변경
 
+    # 색상에 맞는 이미지로 변경
+
+    # 구슬에 충돌할때 점수 증가
+
+    # 하트가 다 사라지면 게임오버 및 점수 보여주기
 
 
 # 렌더링
