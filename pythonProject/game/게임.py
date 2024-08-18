@@ -1,6 +1,7 @@
 import pygame
 import random
 import 위치설정
+from test import current_character
 
 print(위치설정.a)
 위치설정.a = 6
@@ -44,13 +45,17 @@ jump=0
 character_color={
     (102, 153, 204): characters[1], # 제트
     (196,53,210): characters[2], # #레이나
-    (255,100,68): characters[2], # #레이즈
-    (199,244,194): characters[2], # #세이지
-    (250,224,153): characters[2], # 스카이
-    (60,74,201): characters[2], # #오멘
-    (218,58,9): characters[2], # #피닉스
+    (255,100,68): characters[3], # #레이즈
+    (199,244,194): characters[4], # #세이지
+    (250,224,153): characters[5], # 스카이
+    (60,74,201): characters[6], # #오멘
+    (218,58,9): characters[7], # #피닉스
     (0, 0, 0): characters[0]
 }
+
+# 처음 시작시 캐릭터 고정
+current_character=characters[0]
+
 
 
 # 공격위치
@@ -80,14 +85,6 @@ item_colors={
     (60,74,201), # 오멘
     (218,58,9), # 피닉스
 }
-
-#구슬 색상 변경
-def colorized_image(image, color):
-    colored_image=pygame.Surface((item_width, item_height), pygame.SRCALPHA)
-    colored_image.blit(image, (0,0))
-
-    overlay = pygame.
-
 
 
 # 장애물 위치
@@ -132,11 +129,13 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 jump=character_y_pos
+
                 print ("점프")
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
                 jump=0
+
 
 #각종 캐릭터, 이벤트들 위치 계산
     #캐릭터 위치
@@ -144,6 +143,8 @@ while running:
 
     #배경위치
     background_x_pos=background_x_pos-map_speed
+    if background_x_pos <= - background_width:
+        background_x_pos=0
 
     #칼 위치
     attack_x_pos=attack_x_pos-attack_speed
@@ -163,7 +164,17 @@ while running:
 
 
 # 게임 룰
-    # 구슬 색상 변경
+    # 구슬 색상 변경  #구슬 색상 변경 //구슬 색깔은 잘 변하나, 현재 실행시 바로 작동하는 문제 발생
+    def colorized_image(image, color):
+        colored_image=pygame.Surface((item_width, item_height), pygame.SRCALPHA)
+
+        for x in range(item_width):
+            for y in range(item_height):
+                pixel_color=image.get_at((x,y))
+                if pixel_color !=(0,0,0,0):
+                    colored_image.set_at((x,y), color)
+        return colored_image
+
 
     # 색상에 맞는 이미지로 변경
 
@@ -175,7 +186,7 @@ while running:
 # 렌더링
     window.blit(background,(background_x_pos,background_y_pos))
     # 충돌시 일치하는 이미지 들어가게 설정
-    # window.blit(characters, (character_x_pos,character_y_pos))
+    window.blit(current_character, (character_x_pos,character_y_pos))
     window.blit(attack, (attack_x_pos, attack_y_pos))
     window.blit(item, (item_x_pos,item_y_pos))
     window.blit(wall, (wall_x_pos,wall_y_pos))
