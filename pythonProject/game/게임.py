@@ -1,11 +1,7 @@
+import time
 import pygame
 import random
-import 위치설정
-from test import current_character
 
-print(위치설정.a)
-위치설정.a = 6
-print(위치설정.a)
 #이미지 넣기
 pygame.init()
 
@@ -39,8 +35,26 @@ character_width=character_sizes[0][0]
 character_height=character_sizes[0][1]
 character_x_pos=60
 character_y_pos= (window_height-character_height) + 10
-jump=0
+character_y_default=character_y_pos
 
+# 점프관련
+max_jump=background_height
+jump_start=0
+jump_speed=8
+gravity=2
+fall_speed=5
+is_jumping=False
+is_falling=False
+
+
+#방향키 관련
+down_speed=5
+max_down_distance=character_height/2
+is_down=False
+space_pressed_time = None
+down_pressed_time = None
+
+#todo 원래는 첫번째 캐릭터  고정해두려고 마지막에 000 넣은건데 필요없을 시 삭제
 # 캐릭터별 색깔
 character_color={
     (102, 153, 204): characters[1], # 제트
@@ -50,41 +64,56 @@ character_color={
     (250,224,153): characters[5], # 스카이
     (60,74,201): characters[6], # #오멘
     (218,58,9): characters[7], # #피닉스
-    (0, 0, 0): characters[0]
+    (102, 153, 204): characters[0]
 }
 
 # 처음 시작시 캐릭터 고정
 current_character=characters[0]
 
-
+#todo 벽, 아이템, 공격 전부 x 위치 window_width로 바꾸기
 
 # 공격위치
 attack_size=attack.get_rect().size
 attack_width=attack_size[0]
 attack_height=attack_size[1]
-attack_x_pos= window_width-attack_width
-attack_y_pos= character_y_pos+45
+attack_x_pos= window_width
+attack_y_pos= random.randint(500, character_y_pos +200)
+last_attack=time.time()
+attack_interval=random.uniform(3,7)
 attack_speed=1 # 칼 속도
+attack_ready=False #바로생성x 일정 시간 준비 후  생성
 
-
+#todo y_pos 체크하기
 # 구슬위치
 item_size=item.get_rect().size
 item_width=item_size[0]
 item_height=item_size[1]
-item_x_pos= window_width-item_width
-item_y_pos= character_y_pos -200
+item_x_pos= window_width
+item_y_pos= random.randint(500, character_y_pos +200)
 item_speed=1 # 칼 속도
+last_item=time.time()
+item_interval=random.uniform(5,10)
+item_ready=False
 
-#구슬 색깔
-item_colors={
-    (102, 153, 204), # 제트
-    (196,53,210), # 레이나
-    (255,100,68), # 레이즈
-    (199,244,194), #세이지
-    (250,224,153), # 스카이
-    (60,74,201), # 오멘
-    (218,58,9), # 피닉스
-}
+#구슬 색깔 매핑
+item_colors=list(character_color.keys())
+
+#아이템 색상 변경함수
+def colorized_image(image, color):
+    colored_image = pygame.Surface((item_width, item_height), pygame.SRCALPHA)
+    for x in range(item_width):
+        for y in range(item_height):
+            pixel_color = image.get_at((x, y))
+            if pixel_color[3] != 0:
+                new_color=(color[0], color[1], color[2], pixel_color[3])
+                colored_image.set_at((x, y), new_color)
+    return colored_image
+
+#구슬 색깔 무작위로 선정
+selected_color=random.choice(item_colors)
+
+# 아이템 이미지 색상변경
+item=colorized_image(item, selected_color)
 
 
 # 장애물 위치
@@ -116,6 +145,7 @@ hit_count=0
 running = True
 
 while running:
+    current_time=time.time()
 
 #키보드 이벤트
     event_list = pygame.event.get()
@@ -127,33 +157,112 @@ while running:
 
         #스페이스 누르면 점프
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                jump=character_y_pos
-
-                print ("점프")
+            if event.key == pygame.K_SPACE and not is_jumping:
+                is_jumping=True
+                jump_start=character_y_pos
+                space_pressed_time=time.time() #스페이스를 처음 누른 시간(3초이상 누르기 금지)
+            if event.key == pygame.K_DOWN and not is_down:
+                is_down=True
+                down_pressed_time=time.time() #아래키  누른시간
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
-                jump=0
+                is_jumping=False
+                is_falling=True
+                space_pressed_time=None #  스페이스바 누른시간 초기화
+            if event.key == pygame.K_DOWN:
+                is_down=False
+                down_pressed_time=None  #아래키 시간 초기화
+
+    if pygame.key.get_pressed()[pygame.K_SPACE]:
+        if space_pressed_time and time.time()-space_pressed_time>3: #3초 이상 눌렀다면
+            is_jumping=False
+            is_falling=True
+            space_pressed_time=None
+    if pygame.key.get_pressed()[pygame.K_DOWN]:
+        if down_pressed_time and time.time()-down_pressed_time>3:
+            is_down=False
+            down_pressed_time=None
 
 
 #각종 캐릭터, 이벤트들 위치 계산
-    #캐릭터 위치
-    character_y_pos=character_y_pos+jump
+    #캐릭터  스페이스 눌렀을때 위치
+    if is_jumping:
+        if character_y_pos>jump_start-max_jump:
+            character_y_pos=character_y_pos-jump_speed
+        else:
+            is_jumping=False
+            is_falling=True
+    if is_falling:
+        if character_y_pos<character_y_default:
+            character_y_pos=character_y_pos+fall_speed
+        else:
+            character_y_pos=character_y_default
+            is_falling=False
+
+    #캐릭터 다운키 눌렀을때 위치
+    if is_down:
+        if character_height<character_y_default+max_down_distance:
+            character_y_pos=character_y_pos+down_speed
+            if character_y_pos > character_y_default+character_height/2:
+                character_y_pos = character_y_default+character_height/2
+        else:
+            character_y_pos=character_y_default+max_down_distance
+
+    if not is_down and not character_y_pos<character_y_default:
+        character_y_pos=character_y_pos+gravity
+        if character_y_pos > character_y_default:
+            character_y_pos = character_y_default
+
+    #캐릭터 화면 벗어나지 못하게 조정
+    if character_y_pos < 0:
+        character_y_pos = 0
+    if character_y_pos < max_down_distance:
+        character_y_pos = max_down_distance
+
 
     #배경위치
     background_x_pos=background_x_pos-map_speed
     if background_x_pos <= - background_width:
         background_x_pos=0
 
+
     #칼 위치
-    attack_x_pos=attack_x_pos-attack_speed
+    if attack_ready:
+        attack_x_pos=attack_x_pos-attack_speed # 공격이 레디상태일 때에만 화면에 보이게 할 것ㄱ
+
+        #이미지가 화면 밖으로 나갔을때
+        if attack_x_pos < -attack_width:
+            attack_ready=False #공격 준비상태로 변경
+            attack_x_pos=window_width
+            last_attack=current_time
+    if not attack_ready and current_time-last_attack>=attack_interval:
+        attack_y_pos = random.randint(500, character_y_default + 200)
+        attack_interval = random.uniform(3, 7)
+        attack_ready=True
 
     #구슬위치
-    item_x_pos=item_x_pos-item_speed
-
+    if item_ready:
+        item_x_pos=item_x_pos-item_speed
+        if item_x_pos < -item_width:
+            # 다시 오른쪽에서 생성
+            item_ready=False
+            item_x_pos=window_width
+            last_item=current_time
+            selected_color = random.choice(item_colors)
+            item = colorized_image(item, selected_color)
+    if not item_ready and current_time-last_item>=item_interval:
+        item_y_pos=random.randint(500, character_y_default +200)
+        #색상 변경
+        selected_color=random.choice(item_colors)
+        item=colorized_image(item,selected_color)
+        #생성 시간
+        item_interval=random.uniform(5,10)
+        item_ready=True
+        
     #벽 위치
     wall_x_pos=wall_x_pos-wall_speed
+
 
     #하트위치
 
@@ -161,19 +270,21 @@ while running:
 
 #충돌판정
     # character_rect=characters.rect().size
+    character_rect = pygame.Rect(character_x_pos, character_y_pos, character_width, character_height)
+    item_rect = pygame.Rect(item_x_pos, item_y_pos, item_width, item_height)
+
+    if character_rect.colliderect(item_rect):
+        current_character = character_color[selected_color]  # 충돌 시 캐릭터 변경
+        #새로운 색상과 아이템 이미지 설정
+        selected_color=random.choice(item_colors)
+        item=colorized_image(item,selected_color)
+        #아이템 위치와 타이머  속성 초기화
+        item_x_pos = window_width  # 아이템 위치 초기화 (충돌 후 다시 시작)
+        item_y_pos = random.randint(500, character_y_default + 200)
 
 
 # 게임 룰
     # 구슬 색상 변경  #구슬 색상 변경 //구슬 색깔은 잘 변하나, 현재 실행시 바로 작동하는 문제 발생
-    def colorized_image(image, color):
-        colored_image=pygame.Surface((item_width, item_height), pygame.SRCALPHA)
-
-        for x in range(item_width):
-            for y in range(item_height):
-                pixel_color=image.get_at((x,y))
-                if pixel_color !=(0,0,0,0):
-                    colored_image.set_at((x,y), color)
-        return colored_image
 
 
     # 색상에 맞는 이미지로 변경
