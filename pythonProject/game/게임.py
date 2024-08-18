@@ -2,8 +2,8 @@ import time
 import pygame
 import random
 
-#이미지 넣기
-pygame.init()
+    #이미지 넣기
+    pygame.init()
 
 #화면크기
 window_width=1920
