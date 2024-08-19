@@ -12,7 +12,7 @@ window=pygame.display.set_mode((window_width,window_height))
 pygame.display.set_caption("피하기") # 제목
 
 #맵, 캐릭터, 날라오는거, 장애물
-background = pygame.image.load('../image/배경.png').convert_alpha()
+background = pygame.image.load('../image/bg2.png').convert_alpha()
 character_files = ['../image/J.png', '../image/J.png', '../image/R.png', '../image/L.png', '../image/S.png', '../image/sky.png', '../image/O.png','../image/P.png']
 characters=[pygame.image.load(file).convert_alpha() for file in character_files]
 item= pygame.image.load("../image/구슬.png").convert_alpha()
@@ -20,12 +20,13 @@ life_item=pygame.image.load("../image/하트.png").convert_alpha()
 wall=pygame.image.load("../image/벽.png").convert_alpha()
 attack=pygame.image.load("../image/칼.png").convert_alpha()
 life=pygame.image.load("../image/하트.png").convert_alpha()
-game_font=pygame.font.SysFont('오뮤 다예쁨체', 48)
+game_font=pygame.font.Font('omyu_pretty.ttf', 48)
+gameover_font=pygame.font.Font('Jalnan2.otf', 60)
 
 #맵만들기
-background_size=background.get_rect().size
-background_width=window.get_rect().size[0]
-background_height=window.get_rect().size[1]
+background_size=window.get_rect().size
+background_width=background_size[0]
+background_height=background_size[1]
 background_x_pos=0
 background_y_pos=0
 map_speed=0.5 #맵이 왼쪽으로 움직이는 속도
@@ -151,10 +152,12 @@ lifes=[life]*max_life
 #총플레이
 score=0
 hit_count=0
+start_time=pygame.time.get_ticks() #5초 카운트용
 
 ###########
 #메인루프
 running = True
+previous_time=-1
 
 while running:
     current_time=time.time()
@@ -266,7 +269,7 @@ while running:
         selected_color=random.choice(item_colors)
         item=colorized_image(item,selected_color)
         #생성 시간
-        item_interval=random.uniform(3,9)
+        item_interval=random.uniform(6,20)
         item_ready=True
 
     # 생명 아이템
@@ -278,7 +281,7 @@ while running:
             last_life=current_time
     if not life_ready and current_time-last_life>=life_item_interval:
         life_item_y_pos=random.randint(500, character_y_default +200)
-        life_item_interval = random.uniform(6,12)
+        life_item_interval = random.uniform(8,30)
         life_ready=True
 
     #벽 위치
@@ -289,7 +292,7 @@ while running:
             wall_x_pos=window_width
             last_wall=current_time
     if not wall_ready and current_time-last_wall>=wall_interval:
-        wall_interval=random.uniform(4,8)
+        wall_interval=random.uniform(4,25)
         wall_ready=True
 
 #충돌판정 아이템(점수), 생명, 공격, 벽
@@ -324,14 +327,35 @@ while running:
     if character_rect.colliderect(wall_rect):
         hit_count=hit_count+1
         wall_x_pos=window_width
-        wall_y_pos=random.randint(500, character_y_default + 200)
 
 
 # 게임 룰
-    # 5초마다 속도 증가
-    # 하트가 다 사라지면 게임오버 및 점수 보여주기
+    #점수 기록
+    current_score=str(int(score))
+    score_show=game_font.render("SCORE: " +current_score, True, (0,112,135))
 
-    
+
+    # 5초마다 속도 증가 아이템(점수), 생명, 공격, 벽
+
+    elapsed_time=(pygame.time.get_ticks()-start_time)/1000
+    if int(elapsed_time)%5==0 and int(elapsed_time)!=previous_time:
+        print("초 %f 속도 증가 속도%f" % (elapsed_time, item_speed))
+        item_speed=item_speed+0.08
+        life_speed=life_speed+0.15
+        attack_speed=attack_speed+0.25
+        wall_speed=wall_speed+0.15
+        map_speed=map_speed+0.03
+        previous_time=int(elapsed_time)
+    elif int(elapsed_time)%5!=0:
+        item_speed=item_speed
+
+    # 하트가 다 사라지면 게임오버 및 점수 보여주기
+    gameover = gameover_font.render("GAME OVER", True, (152, 0, 0))
+    if hit_count==5:
+        window.blit(gameover, ((window_width/2)-150, window_height/2))
+        pygame.display.update()
+        time.sleep(3)
+        running = False
 
 
 # 렌더링
@@ -342,6 +366,7 @@ while running:
     window.blit(item, (item_x_pos,item_y_pos))
     window.blit(wall, (wall_x_pos,wall_y_pos))
     window.blit(life_item,(life_item_x_pos,life_item_y_pos))
+    window.blit(score_show, (10, 20))
     for i in range(max_life-hit_count):
         window.blit(lifes[i], (life_x_pos,100+ i*(life_y_pos+30)))
 
