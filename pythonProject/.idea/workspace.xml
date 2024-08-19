@@ -4,32 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e738fc7-a7db-4fae-9181-68d331a87a26" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/crud/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crud/account/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crud/account/account.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crud/account/account_mapper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crud/account/account_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crud/account/account_vo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crud/board/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crud/controller/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crud/db/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crud/db/db_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crud/login/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pythonProject.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/.idea/game.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/.idea/vcs.xml" beforeDir="false" />
-    </list>
+    <list default="true" id="9e738fc7-a7db-4fae-9181-68d331a87a26" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,7 +100,7 @@
       <updated>1723612777986</updated>
       <workItem from="1723612779098" duration="12604000" />
       <workItem from="1723626511310" duration="175000" />
-      <workItem from="1724043329467" duration="13311000" />
+      <workItem from="1724043329467" duration="13426000" />
     </task>
     <servers />
   </component>
