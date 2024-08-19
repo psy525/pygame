@@ -122,7 +122,7 @@ life_item_x_pos=window_width
 life_item_y_pos=random.randint(500, character_y_pos +200)
 life_item_speed=1
 last_life=time.time()
-life_interval=random.uniform(6,12)
+life_item_interval=random.uniform(6,12)
 life_ready=False
 
 # 장애물 위치
@@ -142,7 +142,7 @@ life_width=life_size[0]
 life_height=life_size[1]
 life_x_pos=40
 life_y_pos=60
-life_speed=5
+life_speed=1
 
 #최대목숨 설정
 max_life=5
@@ -266,7 +266,7 @@ while running:
         selected_color=random.choice(item_colors)
         item=colorized_image(item,selected_color)
         #생성 시간
-        item_interval=random.uniform(5,10)
+        item_interval=random.uniform(3,9)
         item_ready=True
 
     # 생명 아이템
@@ -276,25 +276,29 @@ while running:
             life_ready=False
             life_item_x_pos=window_width
             last_life=current_time
-    if not life_ready and current_time-last_life>=life_interval:
-        life_y_pos=random.randint(500, character_y_default +200)
-        life_interval = random.uniform(6,12)
+    if not life_ready and current_time-last_life>=life_item_interval:
+        life_item_y_pos=random.randint(500, character_y_default +200)
+        life_item_interval = random.uniform(6,12)
         life_ready=True
 
     #벽 위치
     if wall_ready:
         wall_x_pos=wall_x_pos-wall_speed
         if wall_x_pos < -wall_width:
+            wall_ready=False
             wall_x_pos=window_width
             last_wall=current_time
     if not wall_ready and current_time-last_wall>=wall_interval:
-        wall_interval=random.uniform(3,7)
+        wall_interval=random.uniform(4,8)
         wall_ready=True
 
-#충돌판정
-    # character_rect=characters.rect().size
+#충돌판정 아이템(점수), 생명, 공격, 벽
+
     character_rect = pygame.Rect(character_x_pos, character_y_pos, character_width, character_height)
     item_rect = pygame.Rect(item_x_pos, item_y_pos, item_width, item_height)
+    life_item_rect=pygame.Rect(life_item_x_pos, life_item_y_pos, life_item_width, life_item_height)
+    attack_rect=pygame.Rect(attack_x_pos, attack_y_pos, attack_width, attack_height)
+    wall_rect=pygame.Rect(wall_x_pos, wall_y_pos, wall_width, wall_height)
 
     if character_rect.colliderect(item_rect):
         current_character = character_color[selected_color]  # 충돌 시 캐릭터 변경
@@ -304,17 +308,30 @@ while running:
         #아이템 위치와 타이머  속성 초기화
         item_x_pos = window_width  # 아이템 위치 초기화 (충돌 후 다시 시작)
         item_y_pos = random.randint(500, character_y_default + 200)
+        score=score+10
+
+    if character_rect.colliderect(life_item_rect):
+        if hit_count >=1 and hit_count <5:
+            hit_count=hit_count-1
+        life_item_x_pos=window_width
+        life_item_y_pos= random.randint(500, character_y_default + 200)
+
+    if character_rect.colliderect(attack_rect):
+        hit_count=hit_count+1
+        attack_x_pos=window_width
+        attack_y_pos=random.randint(500, character_y_default + 200)
+
+    if character_rect.colliderect(wall_rect):
+        hit_count=hit_count+1
+        wall_x_pos=window_width
+        wall_y_pos=random.randint(500, character_y_default + 200)
 
 
 # 게임 룰
-    # 구슬 색상 변경  #구슬 색상 변경 //구슬 색깔은 잘 변하나, 현재 실행시 바로 작동하는 문제 발생
-
-
-    # 색상에 맞는 이미지로 변경
-
-    # 구슬에 충돌할때 점수 증가
-
+    # 5초마다 속도 증가
     # 하트가 다 사라지면 게임오버 및 점수 보여주기
+
+    
 
 
 # 렌더링
@@ -324,7 +341,7 @@ while running:
     window.blit(attack, (attack_x_pos, attack_y_pos))
     window.blit(item, (item_x_pos,item_y_pos))
     window.blit(wall, (wall_x_pos,wall_y_pos))
-
+    window.blit(life_item,(life_item_x_pos,life_item_y_pos))
     for i in range(max_life-hit_count):
         window.blit(lifes[i], (life_x_pos,100+ i*(life_y_pos+30)))
 
