@@ -2,8 +2,8 @@ import time
 import pygame
 import random
 
-    #이미지 넣기
-    pygame.init()
+ #이미지 넣기
+pygame.init()
 
 #화면크기
 window_width=1920
@@ -16,6 +16,7 @@ background = pygame.image.load('../image/배경.png').convert_alpha()
 character_files = ['../image/J.png', '../image/J.png', '../image/R.png', '../image/L.png', '../image/S.png', '../image/sky.png', '../image/O.png','../image/P.png']
 characters=[pygame.image.load(file).convert_alpha() for file in character_files]
 item= pygame.image.load("../image/구슬.png").convert_alpha()
+life_item=pygame.image.load("../image/하트.png").convert_alpha()
 wall=pygame.image.load("../image/벽.png").convert_alpha()
 attack=pygame.image.load("../image/칼.png").convert_alpha()
 life=pygame.image.load("../image/하트.png").convert_alpha()
@@ -46,7 +47,6 @@ fall_speed=5
 is_jumping=False
 is_falling=False
 
-
 #방향키 관련
 down_speed=5
 max_down_distance=character_height/2
@@ -54,7 +54,7 @@ is_down=False
 space_pressed_time = None
 down_pressed_time = None
 
-#todo 원래는 첫번째 캐릭터  고정해두려고 마지막에 000 넣은건데 필요없을 시 삭제
+#todo 원래는 첫번째 캐릭터 고정해두려고 마지막에 000 넣은건데 필요없을 시 삭제
 # 캐릭터별 색깔
 character_color={
     (102, 153, 204): characters[1], # 제트
@@ -71,7 +71,6 @@ character_color={
 current_character=characters[0]
 
 #todo 벽, 아이템, 공격 전부 x 위치 window_width로 바꾸기
-
 # 공격위치
 attack_size=attack.get_rect().size
 attack_width=attack_size[0]
@@ -115,14 +114,27 @@ selected_color=random.choice(item_colors)
 # 아이템 이미지 색상변경
 item=colorized_image(item, selected_color)
 
+#하트 아이템 6~12s
+life_item_size=life_item.get_rect().size
+life_item_width=life_item_size[0]
+life_item_height=life_item_size[1]
+life_item_x_pos=window_width
+life_item_y_pos=random.randint(500, character_y_pos +200)
+life_item_speed=1
+last_life=time.time()
+life_interval=random.uniform(6,12)
+life_ready=False
 
 # 장애물 위치
 wall_size=wall.get_rect().size
 wall_width=wall_size[0]
 wall_height=wall_size[1]
-wall_x_pos=window_width-wall_width
+wall_x_pos=window_width
 wall_y_pos=window_height-wall_height
 wall_speed=1
+last_wall=time.time()
+wall_interval=random.uniform(3,7)
+wall_ready=False
 
 # 하트 위치
 life_size=life.get_rect().size
@@ -184,7 +196,6 @@ while running:
             is_down=False
             down_pressed_time=None
 
-
 #각종 캐릭터, 이벤트들 위치 계산
     #캐릭터  스페이스 눌렀을때 위치
     if is_jumping:
@@ -220,16 +231,14 @@ while running:
     if character_y_pos < max_down_distance:
         character_y_pos = max_down_distance
 
-
     #배경위치
     background_x_pos=background_x_pos-map_speed
     if background_x_pos <= - background_width:
         background_x_pos=0
 
-
     #칼 위치
     if attack_ready:
-        attack_x_pos=attack_x_pos-attack_speed # 공격이 레디상태일 때에만 화면에 보이게 할 것ㄱ
+        attack_x_pos=attack_x_pos-attack_speed # 공격이 레디상태일 때에만 화면에 보이게 할 것
 
         #이미지가 화면 밖으로 나갔을때
         if attack_x_pos < -attack_width:
@@ -259,14 +268,28 @@ while running:
         #생성 시간
         item_interval=random.uniform(5,10)
         item_ready=True
-        
+
+    # 생명 아이템
+    if life_ready:
+        life_item_x_pos=life_item_x_pos-life_speed
+        if life_item_x_pos < -life_item_width:
+            life_ready=False
+            life_item_x_pos=window_width
+            last_life=current_time
+    if not life_ready and current_time-last_life>=life_interval:
+        life_y_pos=random.randint(500, character_y_default +200)
+        life_interval = random.uniform(6,12)
+        life_ready=True
+
     #벽 위치
-    wall_x_pos=wall_x_pos-wall_speed
-
-
-    #하트위치
-
-
+    if wall_ready:
+        wall_x_pos=wall_x_pos-wall_speed
+        if wall_x_pos < -wall_width:
+            wall_x_pos=window_width
+            last_wall=current_time
+    if not wall_ready and current_time-last_wall>=wall_interval:
+        wall_interval=random.uniform(3,7)
+        wall_ready=True
 
 #충돌판정
     # character_rect=characters.rect().size
