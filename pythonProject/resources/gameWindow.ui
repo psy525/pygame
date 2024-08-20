@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>678</width>
-    <height>376</height>
+    <width>538</width>
+    <height>429</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="whatsThis">
+   <string/>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -20,7 +23,7 @@
    <widget class="QLabel" name="exLabel">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>150</x>
       <y>40</y>
       <width>221</width>
       <height>101</height>
@@ -31,6 +34,9 @@
       <family>오뮤 다예쁨체</family>
       <pointsize>16</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>다가오는 장애물들을 피해 
@@ -53,7 +59,7 @@
    <widget class="QPushButton" name="startButton">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>170</x>
       <y>150</y>
       <width>181</width>
       <height>51</height>
@@ -75,7 +81,7 @@
    <widget class="QLabel" name="ex2Label">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>190</x>
       <y>220</y>
       <width>151</width>
       <height>16</height>
@@ -97,7 +103,7 @@
    <widget class="QPushButton" name="loginButton">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>170</x>
       <y>250</y>
       <width>61</width>
       <height>31</height>
@@ -124,7 +130,7 @@
    <widget class="QPushButton" name="signupButton">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>280</x>
       <y>250</y>
       <width>71</width>
       <height>31</height>
@@ -148,13 +154,35 @@
      <string>회원가입</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>20</y>
+      <width>481</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/plz/하늘.png);</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>label</zorder>
+   <zorder>exLabel</zorder>
+   <zorder>startButton</zorder>
+   <zorder>ex2Label</zorder>
+   <zorder>loginButton</zorder>
+   <zorder>signupButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>678</width>
+     <width>538</width>
      <height>21</height>
     </rect>
    </property>
@@ -166,7 +194,21 @@
    <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../test/test.qrc"/>
+  <include location="plz.qrc"/>
+ </resources>
  <connections/>
 </ui>

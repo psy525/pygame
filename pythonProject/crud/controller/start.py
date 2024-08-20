@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QMainWindow
 from PyQt5 import uic
 from game.test게임 import *
 from crud.login.login import *
+from resources import *
 class StartWindow(QMainWindow):
     def __init__(self):
         super().__init__()
