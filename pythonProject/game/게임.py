@@ -1,6 +1,10 @@
 import time
 import pygame
 import random
+from PyQt5.QtWidgets import QApplication
+from crud.controller.start import *
+import sys
+
 
  #이미지 넣기
 pygame.init()
@@ -158,6 +162,8 @@ start_time=pygame.time.get_ticks() #5초 카운트용
 #메인루프
 running = True
 previous_time=-1
+clock = pygame.time.Clock()
+
 
 while running:
     current_time=time.time()
@@ -292,7 +298,7 @@ while running:
             wall_x_pos=window_width
             last_wall=current_time
     if not wall_ready and current_time-last_wall>=wall_interval:
-        wall_interval=random.uniform(4,25)
+        wall_interval=random.uniform(4,20)
         wall_ready=True
 
 #충돌판정 아이템(점수), 생명, 공격, 벽
@@ -340,11 +346,11 @@ while running:
     elapsed_time=(pygame.time.get_ticks()-start_time)/1000
     if int(elapsed_time)%5==0 and int(elapsed_time)!=previous_time:
         print("초 %f 속도 증가 속도%f" % (elapsed_time, item_speed))
-        item_speed=item_speed+0.08
-        life_speed=life_speed+0.15
+        item_speed=item_speed+0.2
+        life_speed=life_speed+0.16
         attack_speed=attack_speed+0.25
-        wall_speed=wall_speed+0.15
-        map_speed=map_speed+0.03
+        wall_speed=wall_speed+0.18
+        map_speed=map_speed+0.08
         previous_time=int(elapsed_time)
     elif int(elapsed_time)%5!=0:
         item_speed=item_speed
