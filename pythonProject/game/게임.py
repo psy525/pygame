@@ -18,12 +18,12 @@ pygame.display.set_caption("피하기") # 제목
 #맵, 캐릭터, 날라오는거, 장애물
 background = pygame.image.load('../image/bg2.png').convert_alpha()
 character_files = ['../image/J.png', '../image/J.png', '../image/R.png', '../image/L.png', '../image/S.png', '../image/sky.png', '../image/O.png','../image/P.png']
-characters=[pygame.image.load(file).convert_alpha() for file in character_files]
-item= pygame.image.load("../image/구슬.png").convert_alpha()
-life_item=pygame.image.load("../image/하트.png").convert_alpha()
-wall=pygame.image.load("../image/벽.png").convert_alpha()
-attack=pygame.image.load("../image/칼.png").convert_alpha()
-life=pygame.image.load("../image/하트.png").convert_alpha()
+characters=[pygame.image.load(file) for file in character_files]
+item= pygame.image.load("../image/구슬.png")
+life_item=pygame.image.load("../image/하트.png")
+wall=pygame.image.load("../image/벽.png")
+attack=pygame.image.load("../image/칼.png")
+life=pygame.image.load("../image/하트.png")
 game_font=pygame.font.Font('omyu_pretty.ttf', 48)
 gameover_font=pygame.font.Font('Jalnan2.otf', 60)
 
