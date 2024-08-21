@@ -2,14 +2,16 @@ import oracledb
 
 class DBManager():
     def __init__(self, username, password, dsn):
+        print("오라클 생성")
         self.username = username
         self.password = password
         self.dsn = dsn
-        self.coonection=None
+        self.connection=None
 
     def connect(self):
+        print("Connection 시도")
         try:
-            self.connection=oracledb.connect(user=self.username, password=self.password, dsn=self.dsn)
+            self.connection = oracledb.connect(user=self.username, password=self.password, dsn=self.dsn)
             print("Connection successful")
         except oracledb.DatabaseError as err:
             print(err)
@@ -19,6 +21,16 @@ class DBManager():
             self.connection.close()
             print("Connection closed")
 
+    def sql_execute(self, sql, params):
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute(sql, params or ())
+            self.connection.commit()
+            cursor.close()
+            print("SQL command executed successfully")
+        except oracledb.DatabaseError as err:
+            print(f"SQL execute error: {err}")
+
     def fetch_data(self, query):
         try:
             cursor = self.connection.cursor()
@@ -27,3 +39,4 @@ class DBManager():
         except oracledb.DatabaseError as err:
             print(err)
             return None
+
