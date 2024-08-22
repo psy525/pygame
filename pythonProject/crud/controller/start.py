@@ -23,6 +23,8 @@ class StartWindow(QMainWindow):
         self.close()  # 현재 메인 메뉴를 닫고
         print("start_game")
         start_game()
+        score_window = ScoreWindow(100)
+        score_window.exec()
 
     def login(self):
         self.login = LoginWindow()

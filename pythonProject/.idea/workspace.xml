@@ -5,16 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e738fc7-a7db-4fae-9181-68d331a87a26" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/crud/login/login_mapper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crud/login/login_vo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crud/score/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crud/score/score.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud/account/account.py" beforeDir="false" afterPath="$PROJECT_DIR$/crud/account/account.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud/account/account_mapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/crud/account/account_mapper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud/account/account_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/crud/account/account_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud/db/db_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/crud/db/db_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud/controller/start.py" beforeDir="false" afterPath="$PROJECT_DIR$/crud/controller/start.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/crud/login/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/crud/login/login.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/login.ui" beforeDir="false" afterPath="$PROJECT_DIR$/resources/login.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sign.ui" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sign.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/test게임.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/test게임.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/resource.qrc" beforeDir="false" afterPath="$PROJECT_DIR$/resources/resource.qrc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +52,8 @@
   "keyToString": {
     "Python.GameApplication.executor": "Run",
     "Python.db_manager.executor": "Run",
+    "Python.test (1).executor": "Run",
+    "Python.test.executor": "Run",
     "Python.test게임.executor": "Run",
     "Python.게임.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -75,37 +75,14 @@
       <recent name="C:\workspace\개인공부\pygame\pythonProject\crud\db" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\workspace\개인공부\pygame\pythonProject\crud\score" />
       <recent name="C:\workspace\개인공부\pygame\pythonProject\resources\images" />
       <recent name="C:\workspace\개인공부\pygame\pythonProject\game" />
       <recent name="C:\workspace\개인공부\pygame\pythonProject" />
       <recent name="C:\workspace\개인공부\pygame\pythonProject\crud" />
-      <recent name="C:\workspace\개인공부\pygame\pythonProject\image" />
     </key>
   </component>
   <component name="RunManager" selected="Python.GameApplication">
-    <configuration name="게임" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pythonProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/game" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/game/게임.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="GameApplication" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonProject" />
       <option name="ENV_FILES" value="" />
@@ -175,12 +152,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/game" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/game/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.db_manager" />
+      <item itemvalue="Python.GameApplication" />
+      <item itemvalue="Python.test게임" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.GameApplication" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.db_manager" />
         <item itemvalue="Python.test게임" />
-        <item itemvalue="Python.게임" />
       </list>
     </recent_temporary>
   </component>
@@ -208,29 +214,19 @@
       <workItem from="1724144654044" duration="1858000" />
       <workItem from="1724147788073" duration="503000" />
       <workItem from="1724214783594" duration="14638000" />
-      <workItem from="1724302438166" duration="8041000" />
+      <workItem from="1724302438166" duration="15252000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/game/test게임.py</url>
-          <line>124</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/pythonProject$GameApplication.coverage" NAME="GameApplication Coverage Results" MODIFIED="1724310230711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pythonProject$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1724317228015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game" />
+    <SUITE FILE_PATH="coverage/pythonProject$GameApplication.coverage" NAME="GameApplication Coverage Results" MODIFIED="1724318234690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pythonProject$db_manager.coverage" NAME="db_manager Coverage Results" MODIFIED="1724224725290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/crud/db" />
     <SUITE FILE_PATH="coverage/pythonProject$.coverage" NAME="게임 Coverage Results" MODIFIED="1724137548695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game" />
-    <SUITE FILE_PATH="coverage/pythonProject$test.coverage" NAME="test게임 Coverage Results" MODIFIED="1724138578825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game" />
+    <SUITE FILE_PATH="coverage/pythonProject$test.coverage" NAME="test Coverage Results" MODIFIED="1724317649272" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game" />
     <SUITE FILE_PATH="coverage/_py$.coverage" NAME="게임 Coverage Results" MODIFIED="1724052984144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game" />
   </component>
 </project>

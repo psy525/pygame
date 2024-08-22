@@ -2,6 +2,7 @@
   <qresource prefix="/">
     <file>images/회원가입.png</file>
     <file>images/sky.png</file>
+    <file>images/score.png</file>
     <file>images/로그인.png</file>
   </qresource>
 </RCC>

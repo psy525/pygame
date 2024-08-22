@@ -3,6 +3,7 @@ import pygame
 import random
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from crud.controller.start import *
+from crud.score.score import *
 import sys
 
 def start_game():
@@ -362,8 +363,9 @@ def start_game():
         if hit_count==5:
             window.blit(gameover, ((window_width/2)-150, window_height/2))
             pygame.display.update()
-            time.sleep(3)
+            pygame.time.wait(3000)
             running = False
+            return score
 
 
     # 렌더링
@@ -381,9 +383,12 @@ def start_game():
         pygame.display.update()
 
     #반납
-    pygame.time.delay(1000) #2초 대기 후
+    # pygame.time.delay(1000) #2초 대기 후
+    # score.txt
+    f = open("./score.txt", 'w')
+    f.write(score)
+    f.close()
     pygame.quit() #아예 종료
-
 
 
 

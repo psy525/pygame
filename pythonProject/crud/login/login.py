@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5 import uic
 from crud.login.login_mapper import *
 from crud.account.account_mapper import *
+
+
 class LoginWindow(QMainWindow):
     def __init__(self):
         super().__init__()
