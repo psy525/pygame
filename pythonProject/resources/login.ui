@@ -36,7 +36,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="idLine">
     <property name="geometry">
      <rect>
       <x>190</x>
@@ -132,7 +132,7 @@ QPushButton:hover {
      <string/>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="pwLine">
     <property name="geometry">
      <rect>
       <x>190</x>
@@ -162,10 +162,10 @@ QPushButton:hover {
    </widget>
    <zorder>label_3</zorder>
    <zorder>label</zorder>
-   <zorder>lineEdit</zorder>
+   <zorder>idLine</zorder>
    <zorder>label_2</zorder>
    <zorder>loginButton</zorder>
-   <zorder>lineEdit_2</zorder>
+   <zorder>pwLine</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

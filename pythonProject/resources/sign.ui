@@ -189,7 +189,7 @@
      <string notr="true">border-radius: 4px;</string>
     </property>
     <property name="text">
-     <string/>
+     <string>숫자만 입력</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -233,7 +233,16 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(101, 240, 224);</string>
+     <string notr="true">
+QPushButton{
+background-color: rgb(101, 240, 224);
+}
+
+QPushButton:hover {
+    
+	background-color: rgb(255, 255, 158);
+}
+</string>
     </property>
     <property name="text">
      <string>가입하기</string>
@@ -255,7 +264,14 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 158);</string>
+     <string notr="true">QPushButton{
+background-color: rgb(255, 255, 158);
+}
+
+QPushButton:hover {
+	background-color: rgb(101, 240, 224);
+}
+</string>
     </property>
     <property name="text">
      <string>중복 확인</string>
@@ -277,7 +293,14 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 158);</string>
+     <string notr="true">QPushButton{
+background-color: rgb(255, 255, 158);
+}
+
+QPushButton:hover {
+	background-color: rgb(101, 240, 224);
+}
+</string>
     </property>
     <property name="text">
      <string>중복 확인</string>

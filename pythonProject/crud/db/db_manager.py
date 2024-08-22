@@ -31,6 +31,15 @@ class DBManager():
         except oracledb.DatabaseError as err:
             print(f"SQL execute error: {err}")
 
+    def sql_fetchone(self, sql, params):
+        try:
+            with self.connection.cursor() as cursor:
+                cursor.execute(sql, params)
+                return cursor.fetchone()
+        except oracledb.Error as e:
+            print(f"Error fetching SQL result: {e}")
+            return None
+
     def fetch_data(self, query):
         try:
             cursor = self.connection.cursor()
