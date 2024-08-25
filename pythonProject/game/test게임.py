@@ -385,10 +385,11 @@ def start_game():
     #반납
     # pygame.time.delay(1000) #2초 대기 후
     # score.txt
-    f = open("./score.txt", 'w')
-    f.write(score)
-    f.close()
+    # f = open("./score.txt", 'w')
+    # f.write(score)
+    # f.close()
     pygame.quit() #아예 종료
+    return score
 
 
 
