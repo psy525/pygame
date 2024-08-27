@@ -62,7 +62,6 @@ def start_game():
     space_pressed_time = None
     down_pressed_time = None
 
-    #todo 원래는 첫번째 캐릭터 고정해두려고 마지막에 000 넣은건데 필요없을 시 삭제
     # 캐릭터별 색깔
     character_color={
         (102, 153, 204): characters[1], # 제트
@@ -78,7 +77,6 @@ def start_game():
     # 처음 시작시 캐릭터 고정
     current_character=characters[0]
 
-    #todo 벽, 아이템, 공격 전부 x 위치 window_width로 바꾸기
     # 공격위치
     attack_size=attack.get_rect().size
     attack_width=attack_size[0]
@@ -90,7 +88,6 @@ def start_game():
     attack_speed=1 # 칼 속도
     attack_ready=False #바로생성x 일정 시간 준비 후  생성
 
-    #todo y_pos 체크하기
     # 구슬위치
     item_size=item.get_rect().size
     item_width=item_size[0]

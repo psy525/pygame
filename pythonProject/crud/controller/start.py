@@ -21,11 +21,10 @@ class StartWindow(QMainWindow):
         if font_id_jalan != -1:  # 폰트 로드 성공 시
             jalan_family = QFontDatabase.applicationFontFamilies(font_id_jalan)[0]
 
-
         self.setStyleSheet("""
-                                QMainWindow {{
-                background-image: url(E:/sql/git/pygame/pythonProject/resources/images/sky.png);
-            }}
+                QMainWindow {
+                background-image: url(C:/workspace/개인공부/pygame/pythonProject/resources/images/sky.png);
+            }
             QLabel#label_omu {{
                 font-family: '{omu_family}';
                 font-size: 14pt;
